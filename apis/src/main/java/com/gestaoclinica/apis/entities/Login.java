@@ -32,7 +32,7 @@ public class Login implements Serializable {
 	@JsonIgnore
 	@OneToOne
 	@MapsId
-	private Transportadora transportadora;
+	private Usuario Usuario;
 	
 	
 
@@ -64,11 +64,11 @@ public class Login implements Serializable {
 		
 	}
 	
-	public Login(String senha, int aprovado, Transportadora transportadora) {
+	public Login(String senha, int aprovado, Usuario Usuario) {
 		super();
 		this.senha = senha;
 		this.aprovado = aprovado;
-		this.transportadora = transportadora;
+		this.Usuario = Usuario;
 	}
 
 	public String getSenha() {
@@ -79,12 +79,12 @@ public class Login implements Serializable {
 		this.senha = senha;
 	}
 
-	public Transportadora getTransportadora() {
-		return transportadora;
+	public Usuario getUsuario() {
+		return Usuario;
 	}
 
-	public void setTransportadora(Transportadora transportadora) {
-		this.transportadora = transportadora;
+	public void setUsuario(Usuario Usuario) {
+		this.Usuario = Usuario;
 	}
 
 	public Long getId() {

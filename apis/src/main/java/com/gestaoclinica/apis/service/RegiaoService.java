@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.gestaoclinica.apis.entities.Regiao;
 import com.gestaoclinica.apis.entities.TipoVeiculo;
-import com.gestaoclinica.apis.entities.Transportadora;
+import com.gestaoclinica.apis.entities.Usuario;
 import com.gestaoclinica.apis.repositories.RegiaoRepository;
 import com.gestaoclinica.apis.service.exceptions.RecursoJaCadastradoException;
 import com.gestaoclinica.apis.service.exceptions.ErroNaoMapeadoException;

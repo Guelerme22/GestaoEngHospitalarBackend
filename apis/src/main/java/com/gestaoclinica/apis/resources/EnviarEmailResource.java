@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gestaoclinica.apis.entities.EnviarEmail;
-import com.gestaoclinica.apis.entities.Transportadora;
-import com.gestaoclinica.apis.repositories.TransportadoraRepository;
+import com.gestaoclinica.apis.entities.Usuario;
+import com.gestaoclinica.apis.repositories.UsuarioRepository;
 
 @RestController
 @RequestMapping(value = "/enviar-email")
@@ -22,7 +22,7 @@ public class EnviarEmailResource {
 	public JavaMailSender mailSender;
 
 	@Autowired
-	private TransportadoraRepository repositoryTransportadora;
+	private UsuarioRepository repositoryUsuario;
 	/*
 	 * @Autowired private EmailConfig emailConfig;
 	 * 
@@ -59,14 +59,14 @@ public class EnviarEmailResource {
 			mailMessage.setFrom("noreply@alocaja.portaldotransportador.com");
 
 			if (enviarEmail.getTipoEmail() == 1) {
-				Transportadora transportadora = new Transportadora();
+				Usuario Usuario = new Usuario();
 
-				transportadora = repositoryTransportadora.findByCnpj(enviarEmail.getCnpj());
-				var sendTo = transportadora.getEmail();
+				Usuario = repositoryUsuario.findByCnpj(enviarEmail.getCnpj());
+				var sendTo = Usuario.getEmail();
 				mailMessage.setTo(sendTo);
 				mailMessage.setSubject("AlocaJa - Motorista Pendente");
-				mailMessage.setText("Prezado(a), "  + transportadora.getNome() + "!" + "\n" + "\n"
-						+ "A transportadora tem um novo motorista cadastrado querendo se afiliar! Aprove ou reprove pela plataforma do alocaja:"
+				mailMessage.setText("Prezado(a), "  + Usuario.getNome() + "!" + "\n" + "\n"
+						+ "A Usuario tem um novo motorista cadastrado querendo se afiliar! Aprove ou reprove pela plataforma do alocaja:"
 						+ "\n" + "\n" + "Nome: " + enviarEmail.getNomeMotorista() + "\n" + "CNH: "
 						+ enviarEmail.getCnhMotorista() + "\n" + "Celular: " + enviarEmail.getTelefoneMotorista()
 
@@ -77,7 +77,7 @@ public class EnviarEmailResource {
 				mailMessage.setTo(enviarEmail.getEmail());
 				mailMessage.setSubject("AlocaJa - Bem vindo!");
 				mailMessage.setText("Prezado(a), "  + enviarEmail.getNomeMotorista() + "!" + "\n"+
-							"Seu pedido para fazer parte do portal foi aprovado, segue dados de acesso e transportadora:"+ "\n"
+							"Seu pedido para fazer parte do portal foi aprovado, segue dados de acesso e Usuario:"+ "\n"
 						+ enviarEmail.getMensagem()
 							
 						);
@@ -97,7 +97,7 @@ public class EnviarEmailResource {
 				mailMessage.setTo(enviarEmail.getEmail());
 				mailMessage.setSubject("AlocaJa - Bem vindo!");
 				mailMessage.setText("Prezado(a), "  + enviarEmail.getNomeMotorista() + "!" + "\n"
-						+ "Recebemos seu pedido para fazer parte da AlocaJa! As transportadoras escolhidas foram notificadas sobre seu pedido e assim que for aprovado deve-se receber um email para acessar o aplicativo do portal do transportador!"
+						+ "Recebemos seu pedido para fazer parte da AlocaJa! As Usuarios escolhidas foram notificadas sobre seu pedido e assim que for aprovado deve-se receber um email para acessar o aplicativo do portal do transportador!"
 						+ "\n" + "\n" + "Seja bem vindo(a)!" + "\n" + "\n" + "Atenciosamente," + "\n"
 						+ "Equipe do AlocaJa");
 				System.out.println("email5");

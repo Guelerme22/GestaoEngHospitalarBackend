@@ -69,11 +69,11 @@ public class Motorista implements Serializable{
 	    )
 		private Set<TipoVeiculo> tipoVeiculo = new HashSet<>();
 	 @ManyToMany
-	    @JoinTable(name = "TB_MOTORISTA_TRANSPORTADORA", 
+	    @JoinTable(name = "TB_MOTORISTA_Usuario", 
 	    joinColumns = @JoinColumn(name = "motorista_cpf"),
-	    inverseJoinColumns = @JoinColumn(name = "transportadora_cnpj")
+	    inverseJoinColumns = @JoinColumn(name = "Usuario_cnpj")
 	    )
-		private Set<Transportadora> transportadora = new HashSet<>();
+		private Set<Usuario> Usuario = new HashSet<>();
 /*
 
 	@NotNull
@@ -130,8 +130,8 @@ public class Motorista implements Serializable{
 
 
 
-	public Set<Transportadora> getTransportadora() {
-		return transportadora;
+	public Set<Usuario> getUsuario() {
+		return Usuario;
 	}
 
 
@@ -151,8 +151,8 @@ public class Motorista implements Serializable{
 
 
 
-	public void setTransportadora(Set<Transportadora> transportadora) {
-		this.transportadora = transportadora;
+	public void setUsuario(Set<Usuario> Usuario) {
+		this.Usuario = Usuario;
 	}
 
 

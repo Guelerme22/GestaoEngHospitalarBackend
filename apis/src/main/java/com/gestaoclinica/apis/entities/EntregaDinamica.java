@@ -25,7 +25,7 @@ public class EntregaDinamica implements Serializable{
 	@Id
 	private Long id;
 	@NotNull
-	private Long cnpjTransportadora;
+	private Long cnpjUsuario;
 	private Long cpfMotorista;
 	@NotNull
 	private String statusEntrega;
@@ -70,12 +70,12 @@ public class EntregaDinamica implements Serializable{
 		this.id = id;
 	}
 
-	public Long getCnpjTransportadora() {
-		return cnpjTransportadora;
+	public Long getCnpjUsuario() {
+		return cnpjUsuario;
 	}
 
-	public void setCnpjTransportadora(Long cnpjTransportadora) {
-		this.cnpjTransportadora = cnpjTransportadora;
+	public void setCnpjUsuario(Long cnpjUsuario) {
+		this.cnpjUsuario = cnpjUsuario;
 	}
 
 	public Long getCpfMotorista() {

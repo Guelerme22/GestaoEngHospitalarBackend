@@ -10,5 +10,5 @@ import com.gestaoclinica.apis.entities.EntregaDinamicaLista;
 
 public interface EntregaDinamicaRepository extends JpaRepository<EntregaDinamica, Long> {
 	void deleteById(Long id);
-	List<EntregaDinamica> findAllByCnpjTransportadora(Long cnpj);
+	List<EntregaDinamica> findAllByCnpjUsuario(Long cnpj);
 }

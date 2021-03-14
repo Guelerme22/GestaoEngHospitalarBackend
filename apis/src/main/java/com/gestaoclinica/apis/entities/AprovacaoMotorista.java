@@ -22,7 +22,7 @@ public class AprovacaoMotorista implements Serializable {
 	private Long Id;
 	
 	@NotNull
-	private Long cnpjTransportadora;
+	private Long cnpjUsuario;
 	
 	@NotNull
 	private Long cpfMotorista;
@@ -37,9 +37,9 @@ public class AprovacaoMotorista implements Serializable {
 	}
 
 
-	public AprovacaoMotorista(@NotNull Long cnpjTransportadora, @NotNull Long cpfMotorista, @NotNull int aprovado) {
+	public AprovacaoMotorista(@NotNull Long cnpjUsuario, @NotNull Long cpfMotorista, @NotNull int aprovado) {
 		super();
-		this.cnpjTransportadora = cnpjTransportadora;
+		this.cnpjUsuario = cnpjUsuario;
 		this.cpfMotorista = cpfMotorista;
 		this.aprovado = aprovado;
 	}
@@ -52,12 +52,12 @@ public class AprovacaoMotorista implements Serializable {
 		Id = id;
 	}
 
-	public Long getCnpjTransportadora() {
-		return cnpjTransportadora;
+	public Long getCnpjUsuario() {
+		return cnpjUsuario;
 	}
 
-	public void setCnpjTransportadora(Long cnpjTransportadora) {
-		this.cnpjTransportadora = cnpjTransportadora;
+	public void setCnpjUsuario(Long cnpjUsuario) {
+		this.cnpjUsuario = cnpjUsuario;
 	}
 
 	public Long getCpfMotorista() {
@@ -82,7 +82,7 @@ public class AprovacaoMotorista implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AprovacaoMotorista [Id=" + Id + ", cnpjTransportadora=" + cnpjTransportadora + ", cpfMotorista="
+		return "AprovacaoMotorista [Id=" + Id + ", cnpjUsuario=" + cnpjUsuario + ", cpfMotorista="
 				+ cpfMotorista + ", aprovado=" + aprovado + "]";
 	}
 	

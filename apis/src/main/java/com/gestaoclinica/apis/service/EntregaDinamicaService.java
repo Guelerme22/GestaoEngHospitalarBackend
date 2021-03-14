@@ -31,8 +31,8 @@ public class EntregaDinamicaService {
 	@Autowired
 	private NotasRepository notasRepository;
 	
-	public List<EntregaDinamica> findAllByCnpjTransportadora(Long cnpj) {
-		return repository.findAllByCnpjTransportadora(cnpj);
+	public List<EntregaDinamica> findAllByCnpjUsuario(Long cnpj) {
+		return repository.findAllByCnpjUsuario(cnpj);
 		
 	}
 

@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gestaoclinica.apis.entities.Regiao;
-import com.gestaoclinica.apis.entities.Transportadora;
+import com.gestaoclinica.apis.entities.Usuario;
 import com.gestaoclinica.apis.entities.matrix.Nota;
 import com.gestaoclinica.apis.entities.matrix.NotaRequest;
-import com.gestaoclinica.apis.service.TransportadoraService;
+import com.gestaoclinica.apis.service.UsuarioService;
 
 @RestController
-@RequestMapping (value = "/transportadora")
-public class TransportadoraResource {
+@RequestMapping (value = "/Usuario")
+public class UsuarioResource {
 	
 	@Autowired	
-	private TransportadoraService service;
+	private UsuarioService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Transportadora>> findAll(){
-		List<Transportadora> list = service.findAll();
+	public ResponseEntity<List<Usuario>> findAll(){
+		List<Usuario> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
@@ -45,9 +45,9 @@ public class TransportadoraResource {
 	}
 	
 	@PostMapping(value = "/filter/regiao")
-	public ResponseEntity<List<Transportadora>> findAllByRegiao (@RequestBody List<Regiao> obj){
+	public ResponseEntity<List<Usuario>> findAllByRegiao (@RequestBody List<Regiao> obj){
 		
-		List<Transportadora> list = service.findAllByRegiao(obj);
+		List<Usuario> list = service.findAllByRegiao(obj);
 		return ResponseEntity.ok().body(list);
 	}
 	
@@ -62,30 +62,30 @@ public class TransportadoraResource {
 	
 
 	@GetMapping(value = "/pendentes")
-	public ResponseEntity<List<Transportadora>> findPendentes(){
-		List<Transportadora> list = service.findPendentes();
+	public ResponseEntity<List<Usuario>> findPendentes(){
+		List<Usuario> list = service.findPendentes();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@PutMapping(value = "/atualizar")
-	public ResponseEntity<Transportadora> atualizarTransportadora (@RequestBody Transportadora obj){
+	public ResponseEntity<Usuario> atualizarUsuario (@RequestBody Usuario obj){
 		System.out.println("entrou no put pelo menos");
-		obj = service.atualizarTransportadora(obj);
+		obj = service.atualizarUsuario(obj);
 		System.out.println("entrou no put");
 	 return ResponseEntity.ok().body(obj);
 	}
 	
 	
 	@GetMapping(value = "/{cpf}")
-	public ResponseEntity<Transportadora> findById(@Valid @PathVariable Long cpf){
-		Transportadora obj = service.findById(cpf);
+	public ResponseEntity<Usuario> findById(@Valid @PathVariable Long cpf){
+		Usuario obj = service.findById(cpf);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 	
 	
 	@PostMapping
-	public ResponseEntity<Transportadora> insert (@RequestBody Transportadora obj){
+	public ResponseEntity<Usuario> insert (@RequestBody Usuario obj){
 		System.out.println(obj.toString());
 		
 		obj = service.insert(obj);
@@ -97,16 +97,16 @@ public class TransportadoraResource {
 
 	
 	@PutMapping(value = "/pendentes/aprovar")
-	public ResponseEntity<List<Transportadora>> aprovarTransportadoras (@RequestBody List<Transportadora> obj){
+	public ResponseEntity<List<Usuario>> aprovarUsuarios (@RequestBody List<Usuario> obj){
 		System.out.println("entrou no put pelo menos");
-		obj = service.aprovarTransportadoras(obj);
+		obj = service.aprovarUsuarios(obj);
 		System.out.println("entrou no put");
 	 return ResponseEntity.ok().body(obj);
 	}
 	
 	
 	@PutMapping(value = "/tipo-de-preco")
-	public ResponseEntity<Transportadora> atualizarEscolhaPreco (@RequestBody Transportadora obj){
+	public ResponseEntity<Usuario> atualizarEscolhaPreco (@RequestBody Usuario obj){
 		System.out.println("entrou no put pelo menos");
 		obj = service.atualizarEscolhaPreco(obj);
 		System.out.println("entrou no put");

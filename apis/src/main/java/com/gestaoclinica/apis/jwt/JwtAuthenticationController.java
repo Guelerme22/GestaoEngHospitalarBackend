@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gestaoclinica.apis.entities.Transportadora;
+import com.gestaoclinica.apis.entities.Usuario;
 import com.gestaoclinica.apis.entities.Login;
-import com.gestaoclinica.apis.service.TransportadoraService;
+import com.gestaoclinica.apis.service.UsuarioService;
 import com.gestaoclinica.apis.service.LoginService;
 import com.gestaoclinica.apis.service.exceptions.CorretorNegadoException;
 import com.gestaoclinica.apis.service.exceptions.CorretorPendenteAprovacaoException;
@@ -33,14 +33,14 @@ public class JwtAuthenticationController {
 	@Autowired
 	private LoginService loginService;
 	@Autowired
-	private TransportadoraService corretorService;
+	private UsuarioService corretorService;
 	
-	private Transportadora corretorAprovado;
+	private Usuario corretorAprovado;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		
-		corretorAprovado = new Transportadora ();
+		corretorAprovado = new Usuario ();
 		
 		corretorAprovado = corretorService.findById(authenticationRequest.getCnpj());
 		

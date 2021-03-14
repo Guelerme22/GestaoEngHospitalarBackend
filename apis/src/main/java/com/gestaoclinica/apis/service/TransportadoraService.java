@@ -22,14 +22,14 @@ import com.gestaoclinica.apis.entities.Regiao;
 import com.gestaoclinica.apis.entities.TaxaCepEscala;
 import com.gestaoclinica.apis.entities.TaxaPesoEscala;
 import com.gestaoclinica.apis.entities.TaxaValorKm;
-import com.gestaoclinica.apis.entities.Transportadora;
+import com.gestaoclinica.apis.entities.Usuario;
 import com.gestaoclinica.apis.entities.matrix.Nota;
 import com.gestaoclinica.apis.entities.matrix.NotaRequest;
 import com.gestaoclinica.apis.repositories.LoginRepository;
 import com.gestaoclinica.apis.repositories.TaxaCepEscalaRepository;
 import com.gestaoclinica.apis.repositories.TaxaPesoEscalaRepository;
 import com.gestaoclinica.apis.repositories.TaxaValorKmRepository;
-import com.gestaoclinica.apis.repositories.TransportadoraRepository;
+import com.gestaoclinica.apis.repositories.UsuarioRepository;
 import com.gestaoclinica.apis.service.exceptions.RecursoJaCadastradoException;
 import com.gestaoclinica.apis.service.exceptions.ErroNaoMapeadoException;
 import com.gestaoclinica.apis.service.exceptions.RecursoNaoEncontradoException;
@@ -38,10 +38,10 @@ import com.gestaoclinica.apis.service.exceptions.ValidacaoTamanhoSenhaException;
 import com.gestaoclinica.apis.service.exceptions.CamposObrigatoriosException;
 
 @Service
-public class TransportadoraService {
+public class UsuarioService {
 	
 	@Autowired
-	private TransportadoraRepository repository;
+	private UsuarioRepository repository;
 	
 	@Autowired
 	private LoginRepository loginRepository;
@@ -58,21 +58,21 @@ public class TransportadoraService {
 	@Autowired
 	private LoginService loginService;
 	
-	public List<Transportadora> findAll(){
+	public List<Usuario> findAll(){
 		return repository.findAll();
 	}
-	public List<Transportadora> findAllByRegiao(List<Regiao> regioes){
-		String transportadorasRepetidas = "";
-		List<Transportadora> obj = repository.findAllByRegiaoInAndAprovado(regioes, 1);
-		List<Transportadora> objResponse =  new ArrayList<>();
+	public List<Usuario> findAllByRegiao(List<Regiao> regioes){
+		String UsuariosRepetidas = "";
+		List<Usuario> obj = repository.findAllByRegiaoInAndAprovado(regioes, 1);
+		List<Usuario> objResponse =  new ArrayList<>();
 	
-		 for (Transportadora transportadoraAtual : obj) {
+		 for (Usuario UsuarioAtual : obj) {
 		
 
-			 if ((transportadoraAtual.getAprovado() == 1 || transportadoraAtual.getAprovado() == 10) &&
-					 (!transportadorasRepetidas.contains(transportadoraAtual.getCnpj().toString()))) {
-					transportadorasRepetidas =transportadorasRepetidas + transportadoraAtual.getCnpj().toString();
-					objResponse.add(transportadoraAtual);
+			 if ((UsuarioAtual.getAprovado() == 1 || UsuarioAtual.getAprovado() == 10) &&
+					 (!UsuariosRepetidas.contains(UsuarioAtual.getCnpj().toString()))) {
+					UsuariosRepetidas =UsuariosRepetidas + UsuarioAtual.getCnpj().toString();
+					objResponse.add(UsuarioAtual);
 
 			 }
 	        }
@@ -80,9 +80,9 @@ public class TransportadoraService {
 	}
 	
 	
-	public List<Transportadora> findPendentes(){
+	public List<Usuario> findPendentes(){
 		try {
-			List<Transportadora> obj = repository.findAllByAprovado(0);
+			List<Usuario> obj = repository.findAllByAprovado(0);
 			return obj;
 		} catch (RuntimeException e) {
 			e.printStackTrace();
@@ -101,24 +101,24 @@ public class TransportadoraService {
 		
 	}
 
-	public Transportadora findById(Long cpf) {
+	public Usuario findById(Long cpf) {
 		//Optional: Garante que estamos retornando o objeto no banco de dados, não apenas seus valores//
-		Optional<Transportadora> obj = repository.findById(cpf);
+		Optional<Usuario> obj = repository.findById(cpf);
 		return obj.orElseThrow(() -> new RecursoNaoEncontradoException(cpf,1));
 	}
 	
-	public Transportadora findByCnpj(Long cnpj) {
+	public Usuario findByCnpj(Long cnpj) {
 		//Optional: Garante que estamos retornando o objeto no banco de dados, não apenas seus valores//
-		Transportadora obj = repository.findByCnpj(cnpj);
+		Usuario obj = repository.findByCnpj(cnpj);
 		return obj;
 	}
 	
 	
 	
-	public Transportadora atualizarEscolhaPreco(Transportadora obj){
+	public Usuario atualizarEscolhaPreco(Usuario obj){
 		try {
 		
-			 Transportadora entity = repository.getOne(obj.getCnpj());
+			 Usuario entity = repository.getOne(obj.getCnpj());
 			 entity.setTipoDePreco(obj.getTipoDePreco());
 	         repository.save(entity);
 	        
@@ -134,13 +134,13 @@ public class TransportadoraService {
 	
 	
 	
-	public List<Transportadora> aprovarTransportadoras(List<Transportadora> obj){
+	public List<Usuario> aprovarUsuarios(List<Usuario> obj){
 		try {
-		 for (Transportadora transportadoraAtual : obj) {
-			 Transportadora entity = repository.getOne(transportadoraAtual.getCnpj());
-			 Login loginEntity = loginRepository.getOne(transportadoraAtual.getCnpj());
-			 entity.setAprovado(transportadoraAtual.getAprovado());
-			 loginEntity.setAprovado(transportadoraAtual.getAprovado());
+		 for (Usuario UsuarioAtual : obj) {
+			 Usuario entity = repository.getOne(UsuarioAtual.getCnpj());
+			 Login loginEntity = loginRepository.getOne(UsuarioAtual.getCnpj());
+			 entity.setAprovado(UsuarioAtual.getAprovado());
+			 loginEntity.setAprovado(UsuarioAtual.getAprovado());
 	         repository.save(entity);
 	        }
 		 
@@ -152,14 +152,14 @@ public class TransportadoraService {
 		}
 		return obj;
 	}
-	public Transportadora insert (Transportadora obj) {
+	public Usuario insert (Usuario obj) {
 	if (obj.getSenha().toString().equals(obj.getSenhaConfirmacao().toString())) {
 		if(repository.existsById(obj.getCnpj())){
 			throw new RecursoJaCadastradoException(obj.getCnpj().toString(),1);
 		} else {
 			if (obj.getSenha().length() > 5) {
 			try {
-				Transportadora objEcp = new Transportadora ();
+				Usuario objEcp = new Usuario ();
 				objEcp = obj;
 				objEcp.setSenha(new BCryptPasswordEncoder().encode(obj.getSenha()));
 				objEcp.setSenhaConfirmacao(new BCryptPasswordEncoder().encode(obj.getSenhaConfirmacao()));	
@@ -197,10 +197,10 @@ public class TransportadoraService {
 	
 	
 
-	public Transportadora atualizarTransportadora(Transportadora obj){
+	public Usuario atualizarUsuario(Usuario obj){
 		try {
 		
-			Transportadora entity = repository.findByCnpj(obj.getCnpj());
+			Usuario entity = repository.findByCnpj(obj.getCnpj());
 			entity.setNome(obj.getNome());
 			entity.setNumero(obj.getNumero());
 			entity.setLogradouro(obj.getLogradouro());
@@ -235,7 +235,7 @@ public class TransportadoraService {
 	
 	public double calcularPreco(Long cnpj, double km) {
 		//Optional: Garante que estamos retornando o objeto no banco de dados, não apenas seus valores//
-		Transportadora obj = repository.findByCnpj(cnpj);
+		Usuario obj = repository.findByCnpj(cnpj);
 		double valor = 0;
 		if (obj.getTipoDePreco() == 1) {
 			TaxaValorKm taxaValorKm = new TaxaValorKm();

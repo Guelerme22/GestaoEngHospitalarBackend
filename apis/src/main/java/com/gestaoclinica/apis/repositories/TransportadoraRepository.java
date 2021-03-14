@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gestaoclinica.apis.entities.Regiao;
-import com.gestaoclinica.apis.entities.Transportadora;
+import com.gestaoclinica.apis.entities.Usuario;
 
-public interface TransportadoraRepository extends JpaRepository<Transportadora,Long>{
+public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
 	
-	List<Transportadora> findAllByAprovado(Integer aprovado);
-	List<Transportadora> findAllByRegiaoIn(List<Regiao> regioes);
-	Transportadora findByCnpj(Long cnpj);
-	List<Transportadora> findAllByRegiaoInAndAprovado(List<Regiao> regioes ,int aprovado);
+	List<Usuario> findAllByAprovado(Integer aprovado);
+	List<Usuario> findAllByRegiaoIn(List<Regiao> regioes);
+	Usuario findByCnpj(Long cnpj);
+	List<Usuario> findAllByRegiaoInAndAprovado(List<Regiao> regioes ,int aprovado);
 
 }

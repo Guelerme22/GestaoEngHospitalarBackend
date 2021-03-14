@@ -38,13 +38,13 @@ public class MotoristaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping(value = "/transportadora/{cnpj}")
-	public ResponseEntity<List<Motorista>> findAllByTransportadoraCnpj(@PathVariable Long cnpj){
-		List<Motorista> list = service.findAllByTransportadoraCnpj(cnpj);
+	@GetMapping(value = "/Usuario/{cnpj}")
+	public ResponseEntity<List<Motorista>> findAllByUsuarioCnpj(@PathVariable Long cnpj){
+		List<Motorista> list = service.findAllByUsuarioCnpj(cnpj);
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping(value = "/transportadora/motoristas/pendentes/{cnpj}")
+	@GetMapping(value = "/Usuario/motoristas/pendentes/{cnpj}")
 	public ResponseEntity<List<Motorista>> encontrarMotoristasPendentes(@PathVariable Long cnpj){
 		List<Motorista> list = service.encontrarMotoristasPendentes(cnpj);
 		return ResponseEntity.ok().body(list);

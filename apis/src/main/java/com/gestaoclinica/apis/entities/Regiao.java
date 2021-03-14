@@ -43,7 +43,7 @@ public class Regiao implements Serializable {
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "regiao")	
-	private Set<Transportadora> transportadora = new HashSet<>();
+	private Set<Usuario> Usuario = new HashSet<>();
 	
 	@JsonIgnore 
 	@ManyToMany(mappedBy = "tipoVeiculo")	
@@ -60,14 +60,14 @@ public class Regiao implements Serializable {
 
 
 	public Regiao(@NotEmpty String estado, @NotEmpty String cidade, @NotEmpty String zona, @NotEmpty String cepDe,
-			@NotEmpty String cepPara, Set<Transportadora> transportadora, Set<Motorista> motorista) {
+			@NotEmpty String cepPara, Set<Usuario> Usuario, Set<Motorista> motorista) {
 		super();
 		this.estado = estado;
 		this.cidade = cidade;
 		this.zona = zona;
 		this.cepDe = cepDe;
 		this.cepPara = cepPara;
-		this.transportadora = transportadora;
+		this.Usuario = Usuario;
 		this.motorista = motorista;
 	}
 
@@ -150,13 +150,13 @@ public class Regiao implements Serializable {
 	}
 
 
-	public Set<Transportadora> getTransportadora() {
-		return transportadora;
+	public Set<Usuario> getUsuario() {
+		return Usuario;
 	}
 
 
-	public void setTransportadora(Set<Transportadora> transportadora) {
-		this.transportadora = transportadora;
+	public void setUsuario(Set<Usuario> Usuario) {
+		this.Usuario = Usuario;
 	}
 
 

@@ -20,7 +20,7 @@ public interface MotoristaRepository extends JpaRepository<Motorista,Long>{
  
 	*/
 	List<Motorista> findAllByAprovado(Integer aprovado);
-	List<Motorista> findAllByTransportadoraCnpj(Long cnpj);
+	List<Motorista> findAllByUsuarioCnpj(Long cnpj);
 	Motorista findByCpf(Long cpf);
 
 }

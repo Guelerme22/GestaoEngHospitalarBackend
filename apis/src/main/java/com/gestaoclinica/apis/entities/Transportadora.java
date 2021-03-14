@@ -19,8 +19,8 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="TB_TRANSPORTADORA")
-public class Transportadora implements Serializable {
+@Table(name="TB_Usuario")
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -57,12 +57,12 @@ public class Transportadora implements Serializable {
 	@NotNull
 	private int tipoDePreco;
 	@JsonIgnore 
-	@ManyToMany(mappedBy = "transportadora")	
+	@ManyToMany(mappedBy = "Usuario")	
 	private Set<Motorista> motorista = new HashSet<>();
 
 	 @ManyToMany
-	    @JoinTable(name = "TB_TRANSPORTADORA_REGIAO", 
-	    joinColumns = @JoinColumn(name = "transportadora_cnpj"),
+	    @JoinTable(name = "TB_Usuario_REGIAO", 
+	    joinColumns = @JoinColumn(name = "Usuario_cnpj"),
 	    inverseJoinColumns = @JoinColumn(name = "regiao_id")
 	    )
 		private Set<Regiao> regiao = new HashSet<>(); 
@@ -89,7 +89,7 @@ public class Transportadora implements Serializable {
 	*/
 
 	
-	public Transportadora () {
+	public Usuario () {
 		
 	}
 	

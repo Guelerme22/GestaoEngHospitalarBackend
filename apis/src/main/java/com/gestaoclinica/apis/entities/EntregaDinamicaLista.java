@@ -2,7 +2,7 @@ package com.gestaoclinica.apis.entities;
 
 public interface EntregaDinamicaLista{
 	Long id();
-	Long cnpjTransportadora();
+	Long cnpjUsuario();
 	Long cpfMotorista();
 	String statusEntrega();
 	Filial filial();

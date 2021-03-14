@@ -41,7 +41,7 @@ public class Proprietario implements Serializable {
 	/*
 	@ManyToOne
 	@JoinColumn(name = "corretor_id")
-	private Transportadora corretor;
+	private Usuario corretor;
 
 	@OneToMany (mappedBy = "proprietario")
 	@JsonIgnore
@@ -54,7 +54,7 @@ public class Proprietario implements Serializable {
 		
 	}
 	
-	public Proprietario(Long cpf, String nome, String telefone, String email, String endereco, Transportadora corretor, String nomeAutorizadorDeAnuncio) {
+	public Proprietario(Long cpf, String nome, String telefone, String email, String endereco, Usuario corretor, String nomeAutorizadorDeAnuncio) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.telefone = telefone;
@@ -119,12 +119,12 @@ public class Proprietario implements Serializable {
 		this.endereco = endereco;
 	}
 /*
-	public Transportadora getCorretor() {
+	public Usuario getCorretor() {
 		return corretor;
 	}
 
 
-	public void setCorretor(Transportadora corretor) {
+	public void setCorretor(Usuario corretor) {
 		this.corretor = corretor;
 	}
 	*/

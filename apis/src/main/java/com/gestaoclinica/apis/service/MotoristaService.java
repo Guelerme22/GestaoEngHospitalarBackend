@@ -18,13 +18,13 @@ import org.springframework.transaction.TransactionSystemException;
 
 import com.gestaoclinica.apis.entities.AprovacaoMotorista;
 import com.gestaoclinica.apis.entities.Motorista;
-import com.gestaoclinica.apis.entities.Transportadora;
+import com.gestaoclinica.apis.entities.Usuario;
 import com.gestaoclinica.apis.entities.matrix.RequestLoginMotorista;
 import com.gestaoclinica.apis.entities.matrix.ResponseLoginMotorista;
 import com.gestaoclinica.apis.repositories.AprovacaoMotoristaRepository;
 import com.gestaoclinica.apis.repositories.MotoristaRepository;
 import com.gestaoclinica.apis.repositories.ProprietarioRepository;
-import com.gestaoclinica.apis.repositories.TransportadoraRepository;
+import com.gestaoclinica.apis.repositories.UsuarioRepository;
 import com.gestaoclinica.apis.service.exceptions.ReferenciaExternaException;
 import com.gestaoclinica.apis.service.exceptions.RecursoJaCadastradoException;
 import com.gestaoclinica.apis.service.exceptions.ErroNaoMapeadoException;
@@ -48,7 +48,7 @@ public class MotoristaService {
 	@Autowired
 	private ProprietarioRepository repositoryProprietario;
 	@Autowired
-	private TransportadoraRepository repositoryCorretor;
+	private UsuarioRepository repositoryCorretor;
 	@Autowired
 	private AprovacaoMotoristaRepository aprovacaoRepository;
 	
@@ -57,18 +57,18 @@ public class MotoristaService {
 
 	}
 	
-	public List<Motorista> findAllByTransportadoraCnpj(Long cnpj){
-		return repository.findAllByTransportadoraCnpj(cnpj);
+	public List<Motorista> findAllByUsuarioCnpj(Long cnpj){
+		return repository.findAllByUsuarioCnpj(cnpj);
 
 	}
 	public List<Motorista> encontrarMotoristasPendentes(Long cnpj){
-		List<Motorista> obj = repository.findAllByTransportadoraCnpj(cnpj);
+		List<Motorista> obj = repository.findAllByUsuarioCnpj(cnpj);
 		List<Motorista> pendentes = new ArrayList<Motorista>();
 		for (Motorista objAtual : obj)	
 		{ 
 			AprovacaoMotorista aprovado = new AprovacaoMotorista();
 
-			aprovado = aprovacaoRepository.findByCnpjTransportadoraAndCpfMotorista(cnpj, objAtual.getCpf());
+			aprovado = aprovacaoRepository.findByCnpjUsuarioAndCpfMotorista(cnpj, objAtual.getCpf());
 			
 			if (aprovado.getAprovado() == 0) {
 				pendentes.add(objAtual);
@@ -85,7 +85,7 @@ public class MotoristaService {
 	}
 
 	public int consultarAprovacao(RequestLoginMotorista obj){
-		AprovacaoMotorista obj2 = aprovacaoRepository.findByCnpjTransportadoraAndCpfMotorista(Long.parseLong(obj.getCnpj_transportadora()), obj.getCpf_motorista());
+		AprovacaoMotorista obj2 = aprovacaoRepository.findByCnpjUsuarioAndCpfMotorista(Long.parseLong(obj.getCnpj_Usuario()), obj.getCpf_motorista());
 		
 		return obj2.getAprovado();
 	
@@ -99,7 +99,7 @@ public class MotoristaService {
 		if (obj.getAprovado() == 3 ) {
 
 			AprovacaoMotorista objAprovaMoto = new AprovacaoMotorista();
-			objAprovaMoto = aprovacaoRepository.findByCnpjTransportadoraAndCpfMotorista(Long.parseLong(obj.getCnpj_transportadora()), obj.getCpf_motorista());
+			objAprovaMoto = aprovacaoRepository.findByCnpjUsuarioAndCpfMotorista(Long.parseLong(obj.getCnpj_Usuario()), obj.getCpf_motorista());
 			objAprovaMoto.setAprovado(3);
 			aprovacaoRepository.save(objAprovaMoto);
 			
@@ -107,7 +107,7 @@ public class MotoristaService {
 
 		AprovacaoMotorista objAprovaMotoAntes = new AprovacaoMotorista();
 
-		objAprovaMotoAntes = aprovacaoRepository.findByCnpjTransportadoraAndCpfMotorista(Long.parseLong(obj.getCnpj_transportadora()), obj.getCpf_motorista());
+		objAprovaMotoAntes = aprovacaoRepository.findByCnpjUsuarioAndCpfMotorista(Long.parseLong(obj.getCnpj_Usuario()), obj.getCpf_motorista());
 		
 
 		System.out.println("aprova��o repository depois"+ objAprovaMotoAntes.toString());
@@ -120,7 +120,7 @@ public class MotoristaService {
 				RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
 				  .addFormDataPart("nome", obj.getNome())
 				  .addFormDataPart("email", obj.getEmail())
-				  .addFormDataPart("cnpj_transportadora", obj.getCnpj_transportadora())
+				  .addFormDataPart("cnpj_Usuario", obj.getCnpj_Usuario())
 				  .addFormDataPart("password", obj.getPassword())
 				  .addFormDataPart("placa", obj.getPlaca())
 				  .build();
@@ -147,7 +147,7 @@ public class MotoristaService {
 					System.out.println("IF");
 
 					AprovacaoMotorista objAprovaMoto = new AprovacaoMotorista();
-					objAprovaMoto = aprovacaoRepository.findByCnpjTransportadoraAndCpfMotorista(Long.parseLong(obj.getCnpj_transportadora()), obj.getCpf_motorista());
+					objAprovaMoto = aprovacaoRepository.findByCnpjUsuarioAndCpfMotorista(Long.parseLong(obj.getCnpj_Usuario()), obj.getCpf_motorista());
 					objAprovaMoto.setAprovado(1);
 					aprovacaoRepository.save(objAprovaMoto);
 					
@@ -159,7 +159,7 @@ public class MotoristaService {
 				}
 		
 		} else {
-			return "J� aprovado para essa transportadora!";
+			return "J� aprovado para essa Usuario!";
 		}
 				 
 	}
@@ -265,14 +265,14 @@ public class MotoristaService {
 			  throw new RecursoJaCadastradoException ("N�o existe esse registro.",1);
 		} else {
 		try {
-			 Set<Transportadora> trans = new HashSet<>();
+			 Set<Usuario> trans = new HashSet<>();
 			 
-			 trans =  obj.getTransportadora();
+			 trans =  obj.getUsuario();
 			 if (trans.size() == 0) {
 				AprovacaoMotorista aprovPadrao = new AprovacaoMotorista(Long.parseLong("11111111111111"), obj.getCpf(), 0);
 				aprovacaoRepository.save(aprovPadrao);
 			 } else {
-			for (Transportadora objAtual : trans )	
+			for (Usuario objAtual : trans )	
 				{ 
 	
 					AprovacaoMotorista aprov = new AprovacaoMotorista(objAtual.getCnpj(), obj.getCpf(), 0);

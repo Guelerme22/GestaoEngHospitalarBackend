@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.gestaoclinica.apis.entities.Login;
-import com.gestaoclinica.apis.entities.Transportadora;
+import com.gestaoclinica.apis.entities.Usuario;
 import com.gestaoclinica.apis.repositories.LoginRepository;
 import com.gestaoclinica.apis.service.exceptions.RecursoNaoEncontradoException;
 
@@ -40,9 +40,9 @@ public class LoginService implements UserDetailsService{
 	
 	}
 	
-	public void saveLoginCorretor(Transportadora obj) {
+	public void saveLoginCorretor(Usuario obj) {
 	Login login = new Login();
-		login.setTransportadora(obj);
+		login.setUsuario(obj);
 		login.setSenha(obj.getSenha());
 		
 		System.out.println("hola amigos:"+ obj.getAprovado());
