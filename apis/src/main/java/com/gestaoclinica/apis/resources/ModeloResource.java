@@ -31,8 +31,8 @@ public class ModeloResource {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<List<Modelo>> findAllByMaquina(@PathVariable Long id){
-		List<Modelo> obj = service.findAllByMaquina(id);
+	public ResponseEntity<List<Modelo>> findAllByEquipamento(@PathVariable Long id){
+		List<Modelo> obj = service.findAllByEquipamento(id);
 		return ResponseEntity.ok().body(obj);
 	}
 

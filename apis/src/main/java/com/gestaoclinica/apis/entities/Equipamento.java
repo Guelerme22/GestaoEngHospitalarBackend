@@ -17,15 +17,15 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "TB_EQUIPAMENTO", uniqueConstraints = @UniqueConstraint(columnNames = { "equipamento" }))
-public class Equipamento implements Serializable {
+@Table(name = "TB_INVENTARIO", uniqueConstraints = @UniqueConstraint(columnNames = { "inventario" }))
+public class Inventario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotEmpty
-	private String equipamento;
+	private String inventario;
 
 	@ManyToOne
 	@JoinColumn(name = "modelo_id")
@@ -42,7 +42,7 @@ public class Equipamento implements Serializable {
 	private String dataCadastramento = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
 
 	
-	public Equipamento() {
+	public Inventario() {
 
 	}
 
@@ -57,13 +57,13 @@ public class Equipamento implements Serializable {
 	}
 
 
-	public String getEquipamento() {
-		return equipamento;
+	public String getInventario() {
+		return inventario;
 	}
 
 
-	public void setEquipamento(String equipamento) {
-		this.equipamento = equipamento;
+	public void setInventario(String inventario) {
+		this.inventario = inventario;
 	}
 
 

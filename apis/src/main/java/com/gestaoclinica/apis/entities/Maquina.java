@@ -17,28 +17,28 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "TB_MAQUINA", uniqueConstraints = @UniqueConstraint(columnNames = { "maquina" }))
-public class Maquina implements Serializable {
+@Table(name = "TB_EQUIPAMENTO", uniqueConstraints = @UniqueConstraint(columnNames = { "inventario" }))
+public class Equipamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotEmpty
-	private String maquina;
+	private String inventario;
 
-	@OneToMany (mappedBy = "maquina")
+	@OneToMany (mappedBy = "inventario")
 	@JsonIgnore
 	private List<Modelo> modelo = new ArrayList<>();
 	
 	
-	public Maquina() {
+	public Equipamento() {
 
 	}
 
 
-	public Maquina(@NotEmpty String maquina, List<Modelo> modelo) {
-		this.maquina = maquina;
+	public Equipamento(@NotEmpty String inventario, List<Modelo> modelo) {
+		this.inventario = inventario;
 		this.modelo = modelo;
 	}
 
@@ -53,13 +53,13 @@ public class Maquina implements Serializable {
 	}
 
 
-	public String getMaquina() {
-		return maquina;
+	public String getEquipamento() {
+		return inventario;
 	}
 
 
-	public void setMaquina(String maquina) {
-		this.maquina = maquina;
+	public void setEquipamento(String inventario) {
+		this.inventario = inventario;
 	}
 
 

@@ -29,8 +29,8 @@ public class ModeloService {
 	}
 	
 	
-	public List<Modelo> findAllByMaquina(Long id) {
-		return repository.findAllByMaquina_Id(id);
+	public List<Modelo> findAllByEquipamento(Long id) {
+		return repository.findAllByEquipamento_Id(id);
 
 	}
 
@@ -39,7 +39,7 @@ public class ModeloService {
 			repository.save(obj);
 		} catch (DataIntegrityViolationException e) {
 			e.printStackTrace();
-			String erro  = "Erro de referência externa. Máquina com id " + obj.getMaquina().getId() + " não existe na tabela de máquinas.";
+			String erro  = "Erro de referência externa. Máquina com id " + obj.getEquipamento().getId() + " não existe na tabela de máquinas.";
 			throw new ReferenciaExternaException(erro);
 
 		} catch (ConstraintViolationException e) {

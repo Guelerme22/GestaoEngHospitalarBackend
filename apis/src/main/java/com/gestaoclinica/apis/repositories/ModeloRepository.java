@@ -8,5 +8,5 @@ import com.gestaoclinica.apis.entities.Modelo;
 
 public interface ModeloRepository extends JpaRepository<Modelo, Long> {
 	void deleteById(Long id);
-	List<Modelo> findAllByMaquina_Id(Long id);
+	List<Modelo> findAllByEquipamento_Id(Long id);
 }

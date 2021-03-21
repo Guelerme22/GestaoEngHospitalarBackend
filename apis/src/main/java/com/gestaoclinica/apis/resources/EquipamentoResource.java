@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.gestaoclinica.apis.entities.Equipamento;
-import com.gestaoclinica.apis.service.EquipamentoService;
+import com.gestaoclinica.apis.entities.Inventario;
+import com.gestaoclinica.apis.service.InventarioService;
 
 @RestController
-@RequestMapping (value = "/equipamento")
-public class EquipamentoResource {
+@RequestMapping (value = "/inventario")
+public class InventarioResource {
 	
 	@Autowired
-	private EquipamentoService service;
+	private InventarioService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Equipamento>> findAll(){
-		List<Equipamento> obj = service.findAll();
+	public ResponseEntity<List<Inventario>> findAll(){
+		List<Inventario> obj = service.findAll();
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
-	public ResponseEntity<Equipamento> insert (@RequestBody Equipamento obj){
+	public ResponseEntity<Inventario> insert (@RequestBody Inventario obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				  .buildAndExpand(obj).toUri();
@@ -38,7 +38,7 @@ public class EquipamentoResource {
 	}
 
 	@PostMapping(value = "/deletar")
-	public ResponseEntity<Equipamento> delete (@RequestBody Equipamento obj){
+	public ResponseEntity<Inventario> delete (@RequestBody Inventario obj){
 		obj = service.delete(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				  .buildAndExpand(obj).toUri();

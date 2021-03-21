@@ -10,25 +10,25 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
-import com.gestaoclinica.apis.entities.Equipamento;
-import com.gestaoclinica.apis.repositories.EquipamentoRepository;
+import com.gestaoclinica.apis.entities.Inventario;
+import com.gestaoclinica.apis.repositories.InventarioRepository;
 import com.gestaoclinica.apis.service.exceptions.CamposObrigatoriosException;
 import com.gestaoclinica.apis.service.exceptions.ErroNaoMapeadoException;
 import com.gestaoclinica.apis.service.exceptions.RecursoNaoEncontradoException;
 import com.gestaoclinica.apis.service.exceptions.ReferenciaExternaException;
 
 @Service
-public class EquipamentoService {
+public class InventarioService {
 
 	@Autowired
-	private EquipamentoRepository repository;
+	private InventarioRepository repository;
 
-	public List<Equipamento> findAll() {
+	public List<Inventario> findAll() {
 		return repository.findAll();
 
 	}
 
-	public Equipamento insert(Equipamento obj) {
+	public Inventario insert(Inventario obj) {
 		try {
 			repository.save(obj);
 		} catch (DataIntegrityViolationException e) {
@@ -49,17 +49,17 @@ public class EquipamentoService {
 
 	}
 
-	public Equipamento delete(Equipamento obj) {
+	public Inventario delete(Inventario obj) {
 
 		try {
 			repository.deleteById(obj.getId());
 		} catch (DataIntegrityViolationException e) {
 
-			throw new RecursoNaoEncontradoException("o esse equipamento", obj.getId());
+			throw new RecursoNaoEncontradoException("o esse inventario", obj.getId());
 
 		} catch (EmptyResultDataAccessException e) {
 
-			throw new RecursoNaoEncontradoException("o esse equipamento", obj.getId());
+			throw new RecursoNaoEncontradoException("o esse inventario", obj.getId());
 
 		}  catch (InvalidDataAccessApiUsageException e) {
 			

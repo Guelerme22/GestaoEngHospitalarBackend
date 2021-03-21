@@ -24,8 +24,8 @@ public class Modelo implements Serializable{
 	private String modelo;
 
 	@ManyToOne
-	@JoinColumn(name = "maquina_id")
-	private Maquina maquina;
+	@JoinColumn(name = "equipamento_id")
+	private Equipamento inventario;
 	
 	
 	public Modelo() {
@@ -54,12 +54,12 @@ public class Modelo implements Serializable{
 		this.modelo = modelo;
 	}
 
-	public Maquina getMaquina() {
-		return maquina;
+	public Equipamento getEquipamento() {
+		return inventario;
 	}
 
-	public void setMaquina(Maquina maquina) {
-		this.maquina = maquina;
+	public void setEquipamento(Equipamento inventario) {
+		this.inventario = inventario;
 	}
 
 

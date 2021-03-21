@@ -10,30 +10,30 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
-import com.gestaoclinica.apis.entities.Maquina;
-import com.gestaoclinica.apis.repositories.MaquinaRepository;
+import com.gestaoclinica.apis.entities.Equipamento;
+import com.gestaoclinica.apis.repositories.EquipamentoRepository;
 import com.gestaoclinica.apis.service.exceptions.CamposObrigatoriosException;
 import com.gestaoclinica.apis.service.exceptions.ErroNaoMapeadoException;
 import com.gestaoclinica.apis.service.exceptions.RecursoJaCadastradoException;
 import com.gestaoclinica.apis.service.exceptions.RecursoNaoEncontradoException;
 
 @Service
-public class MaquinaService {
+public class EquipamentoService {
 
 	@Autowired
-	private MaquinaRepository repository;
+	private EquipamentoRepository repository;
 
-	public List<Maquina> findAll() {
+	public List<Equipamento> findAll() {
 		return repository.findAll();
 
 	}
 
-	public Maquina insert(Maquina obj) {
+	public Equipamento insert(Equipamento obj) {
 		try {
 			repository.save(obj);
 		} catch (DataIntegrityViolationException e) {
 
-			throw new RecursoJaCadastradoException("Essa máquina já foi cadastrada no sistema.", obj.getMaquina());
+			throw new RecursoJaCadastradoException("Essa máquina já foi cadastrada no sistema.", obj.getEquipamento());
 
 		} catch (ConstraintViolationException e) {
 			
@@ -48,7 +48,7 @@ public class MaquinaService {
 
 	}
 
-	public Maquina delete(Maquina obj) {
+	public Equipamento delete(Equipamento obj) {
 
 		try {
 			repository.deleteById(obj.getId());
